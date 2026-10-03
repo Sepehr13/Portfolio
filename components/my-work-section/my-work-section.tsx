@@ -18,7 +18,7 @@ export default async function MyWorkSection() {
   const works = data?.map((work) => new Work(work)) || [];
 
   return (
-    <div className="relative flex flex-col items-start justify-start h-full w-full overflow-hidden bg-background xl:px-48 px-8">
+    <div id="my-work-section" className="relative flex flex-col items-start justify-start h-full w-full overflow-hidden bg-background xl:px-48 px-8">
       <div className="flex flex-col gap-2">
         <div className="text-md text-muted-foreground uppercase">My Work</div>
         <div className="text-3xl font-bold text-foreground uppercase">Featured Projects</div>

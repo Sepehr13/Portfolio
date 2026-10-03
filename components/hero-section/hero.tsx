@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { cn } from "@/lib/utils";
 import { DotPattern } from "@/components/ui/DotPattern";
@@ -8,6 +8,13 @@ import { Separator } from "../ui/separator";
 import Image from "next/image";
 
 export function HeroSection() {
+
+  function handleScroll() {
+    document
+      .getElementById("my-work-section")
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
   return (
     <div className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden bg-background">
       <DotPattern
@@ -23,8 +30,12 @@ export function HeroSection() {
             I build scalable web and mobile applications, work with modern technologies, and enjoy solving complex problems. I&apos;m passionate about clean code, great user experiences, and continuous learning.
           </div>
           <div className="flex flex-row gap-6">
-            <Button size="lg" className="px-8 py-6">View My Work <MoveRight /></Button>
-            <Button variant="outline" size="lg" className="p-6">Contact Me</Button>
+            <Button size="lg" className="px-8 py-6" onClick={handleScroll}>
+              View My Work <MoveRight />
+            </Button>
+            <Button variant="outline" size="lg" className="p-6">
+              Contact Me
+            </Button>
           </div>
           <div className="flex flex-row gap-4 text-muted-foreground text-sm mt-6">
             <div className="flex flex-row items-center gap-2">
