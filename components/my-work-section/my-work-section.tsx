@@ -9,7 +9,7 @@ export default async function MyWorkSection() {
   const { data, error } = await supabase
     .from('my-work')
     .select('*')
-    .order('created_at', { ascending: false });
+    .order('id', { ascending: true });
 
   if (error) {
     console.error('Error fetching work data:', error);
@@ -28,9 +28,9 @@ export default async function MyWorkSection() {
       </div>
       <div className="flex flex-row flex-wrap gap-4 mt-8">
         {works.map((work) => (
-          <div key={work.id} className="flex flex-row gap-6 max-w-xl border border-border rounded-md p-6">
-            <Image src={work.image} width={200} height={80} alt={work.title} className="h-40 object-cover rounded-md" />
-            <div className="flex flex-col gap-4">
+          <div key={work.id} className="flex sm:flex-row flex-col gap-6 max-w-xl border border-border rounded-md sm:p-6 overflow-hidden">
+            <Image src={work.image} width={200} height={80} alt={work.title} className="max-sm:w-full object-cover sm:rounded-md" />
+            <div className="flex flex-col gap-4 max-sm:px-3 max-sm:py-2">
               <div className="text-lg font-semibold text-foreground">{work.title}</div>
               <div className="text-sm text-muted-foreground">{work.description}</div>
               <div className="flex flex-wrap gap-1">
