@@ -19,11 +19,11 @@ export default async function MyWorkSection() {
   const works = data?.map((work) => new Work(work)) || [];
 
   return (
-    <div id="my-work-section" className="relative flex flex-col xl:items-start items-center justify-start w-full bg-background xl:px-48 px-8 mb-16">
-      <div className="flex flex-col gap-2">
+    <div id="my-work-section" className="relative flex flex-col xl:items-start items-center justify-start w-full bg-background xl:px-48 px-8 my-16">
+      <div className="flex flex-col">
         <div className="text-md text-muted-foreground uppercase">My Work</div>
         <div className="text-3xl font-bold text-foreground uppercase">Featured Projects</div>
-        <div className="text-lg text-muted-foreground max-w-xl">
+        <div className="text-lg text-muted-foreground max-w-xl mt-2">
           Here are some of the projects I&apos;ve worked on. Each one reflects a different challenge, technology, and learning experience.
         </div>
       </div>
