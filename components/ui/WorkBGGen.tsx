@@ -1,6 +1,5 @@
 "use client";
 
-import { useTheme } from "next-themes";
 import Image from "next/image";
 import clsx from "clsx";
 import { useState, useSyncExternalStore } from "react";
@@ -13,7 +12,6 @@ function generateRandomNumber(): number {
 const subscribeToMount = () => () => {};
 
 export default function WorkBGGen(props: { iconUrl: string, className?: string }) {
-  const { theme } = useTheme();
   const [num] = useState(() => generateRandomNumber());
   const mounted = useSyncExternalStore(subscribeToMount, () => true, () => false);
 
@@ -29,13 +27,12 @@ export default function WorkBGGen(props: { iconUrl: string, className?: string }
         height={80}
         alt="Work Background"
         className={clsx(
-          "absolute -top-full left-0 w-full object-center",
-          mounted && theme === "dark" ? "invert" : "invert-0"
+          "absolute -top-full left-0 w-full object-center"
         )}
       />
       <div className="flex w-full h-full justify-center items-center">
-        <AppIcon theme={theme}>
-          <Image src={props.iconUrl} width={70} height={70} alt="Work Icon" className={clsx(mounted && theme === "dark" ? "invert" : "invert-0")} />
+        <AppIcon theme="light">
+          <Image src={props.iconUrl} width={70} height={70} alt="Work Icon" />
         </AppIcon>
       </div>
     </div>
