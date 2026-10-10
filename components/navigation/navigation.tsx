@@ -17,17 +17,6 @@ export default function Navigation() {
   return (
     <div className="fixed z-20 w-full h-16 bg-background text-foreground flex items-center justify-between lg:px-24 px-8">
       <div className="font-bold text-xl">SA</div>
-      <div className="hidden space-x-4 md:flex pl-12">
-        <Link href="/">
-          Home
-        </Link>
-        <Link href="/about">
-          About
-        </Link>
-        <Link href="/contact">
-          Contact
-        </Link>
-      </div>
       <div className="flex space-x-4">
         <Button variant="ghost" size="icon" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
           {mounted && theme === "system" ? <SunMoon /> : theme === "dark" ? <Sun /> : <Moon />}

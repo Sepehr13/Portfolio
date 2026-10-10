@@ -1,3 +1,4 @@
+import ContactMe from "@/components/contact-me/contact-me";
 import Footer from "@/components/footer/footer";
 import { HeroSection } from "@/components/hero-section/hero";
 import MySkills from "@/components/my-skills/my-skills";
@@ -9,6 +10,7 @@ export default function Home() {
       <HeroSection />
       <MyWorkSection />
       <MySkills />
+      <ContactMe />
       <Footer />
     </main>
   );

@@ -4,6 +4,12 @@ import Navigation from "@/components/navigation/navigation";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 
+import { config } from '@fortawesome/fontawesome-svg-core'
+import '@fortawesome/fontawesome-svg-core/styles.css'
+import { Toaster } from "@/components/ui/toast";
+config.autoAddCss = false
+
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -35,6 +41,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           <Navigation />
           {children}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
