@@ -26,22 +26,26 @@ export async function submitForm(_: unknown, formData: FormData) {
   }
 
   const supabase = await createClient();
-  const dbResult = await supabase.from('contact-me').insert({ name, email, message });
-  if (!dbResult.success) {
-    console.error('Database error:', dbResult.error);
-    return { status: "db-error", submissionId: crypto.randomUUID() };
-  }
-  
-  await fetch(`https://api.telegram.org/bot${process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN}/sendMessage`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      chat_id: '1926409323',
-      text: `New message from ${name} (${email}):\n\n${message}`,
-    }),
-  });
+  const count = (await supabase.from('contact-me').select('*', { count: 'exact', head: true }).eq('email', result.data.email)).count || 0;
 
-  return { status: "success", submissionId: crypto.randomUUID() };
+  if (count >= 5) {
+    return { status: "db-count-error", submissionId: crypto.randomUUID() };
+  } else {
+    const dbResult = await supabase.from('contact-me').insert({ name: result.data.name, email: result.data.email, message: result.data.message });
+    if (!dbResult.success) {
+      console.error('Database error:', dbResult.error);
+      return { status: "db-error", submissionId: crypto.randomUUID() };
+    }
+    await fetch(`https://api.telegram.org/bot${process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN}/sendMessage`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        chat_id: '1926409323',
+        text: `New message from ${name} (${email}):\n\n${message}`,
+      }),
+    });
+    return { status: "success", submissionId: crypto.randomUUID() };
+  }
 }

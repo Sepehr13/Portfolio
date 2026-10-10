@@ -32,21 +32,31 @@ export default function ContactMe() {
     })
   }
 
-  function showErrorToast() {
+  function showErrorToast(description: string) {
     toast.add({
       type: "error",
       title: "An Error Occurred",
-      description: "Unable to save your message. Please try again later.",
+      description
     })
   }
 
   const [state, formAction, isSubmitting] = useActionState(submitForm, initialState);
 
   useEffect(() => {
-    if (state.status === "success") {
-      showToast();
-    } else if (state.status === "db-error") {
-      showErrorToast();
+
+    switch (state.status) {
+      case "success":
+        showToast();
+        break;
+      case "db-error":
+        showErrorToast("Unable to save your message. Please try again later.");
+        break;
+      case "db-count-error":
+        showErrorToast("You can not send message more than 5 times.");
+        break;
+    
+      default:
+        break;
     }
   }, [state.submissionId]);
 
