@@ -29,8 +29,8 @@ export default async function MyWorkSection() {
       <div className="flex flex-row flex-wrap xl:justify-start justify-center gap-4 mt-8">
         {works.map((work) => (
           <div key={work.id} className="flex sm:flex-row flex-col gap-6 max-w-xl border border-border rounded-md sm:p-6 overflow-hidden">
-            <WorkBGGen iconUrl={work.image} className="max-sm:w-full max-sm:h-75 sm:rounded-md overflow-hidden" />
-            <div className="flex flex-col gap-4 max-sm:px-3 max-sm:py-2">
+            <WorkBGGen iconUrl={work.image} className="max-sm:w-full max-sm:h-75 sm:rounded-md overflow-hidden sm:flex-1" />
+            <div className="flex flex-col gap-4 max-sm:px-3 max-sm:py-2 sm:flex-1">
               <div className="text-lg font-semibold text-foreground">{work.title}</div>
               <div className="text-sm text-muted-foreground">{work.description}</div>
               <div className="flex flex-wrap gap-1">
