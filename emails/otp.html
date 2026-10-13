@@ -1,0 +1,282 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light" />
+  <title>Verify your email</title>
+</head>
+
+<body style="
+  margin: 0;
+  padding: 0;
+  background-color: #fafafa;
+  color: #09090b;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+">
+
+  <!-- Preheader: hidden preview text in email clients -->
+  <div style="
+    display: none;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    color: transparent;
+  ">
+    Your verification code is {{OTP}}. It expires in 5 minutes.
+  </div>
+
+  <table
+    role="presentation"
+    width="100%"
+    cellpadding="0"
+    cellspacing="0"
+    border="0"
+    style="background-color: #fafafa;"
+  >
+    <tr>
+      <td align="center" style="padding: 48px 16px;">
+
+        <!-- Main card -->
+        <table
+          role="presentation"
+          width="100%"
+          cellpadding="0"
+          cellspacing="0"
+          border="0"
+          style="
+            max-width: 440px;
+            background-color: #ffffff;
+            border: 1px solid #e4e4e7;
+            border-radius: 12px;
+          "
+        >
+          <!-- Brand -->
+          <tr>
+            <td align="center" style="padding: 32px 32px 0;">
+              <table
+                role="presentation"
+                cellpadding="0"
+                cellspacing="0"
+                border="0"
+              >
+                <tr>
+                  <td
+                    align="center"
+                    valign="middle"
+                    width="36"
+                    height="36"
+                    style="
+                      width: 36px;
+                      height: 36px;
+                      background-color: #09090b;
+                      border-radius: 9px;
+                      color: #ffffff;
+                      font-size: 21px;
+                      font-weight: 600;
+                    "
+                  >
+                    ✳
+                  </td>
+                  <td style="
+                    padding-left: 10px;
+                    color: #09090b;
+                    font-size: 18px;
+                    font-weight: 600;
+                    letter-spacing: -0.5px;
+                  ">
+                    {{APP_NAME}}
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Heading -->
+          <tr>
+            <td align="center" style="padding: 36px 32px 0;">
+              <h1 style="
+                margin: 0;
+                color: #09090b;
+                font-size: 24px;
+                line-height: 32px;
+                font-weight: 600;
+                letter-spacing: -0.8px;
+              ">
+                Verify your email
+              </h1>
+
+              <p style="
+                margin: 12px 0 0;
+                color: #71717a;
+                font-size: 14px;
+                line-height: 23px;
+              ">
+                We received a request to verify your email address.
+                Enter the code below to continue.
+              </p>
+            </td>
+          </tr>
+
+          <!-- OTP -->
+          <tr>
+            <td align="center" style="padding: 28px 24px 0;">
+              <table
+                role="presentation"
+                cellpadding="0"
+                cellspacing="6"
+                border="0"
+              >
+                <tr>
+                  <!-- Use one text string for easy copying -->
+                  <td
+                    align="center"
+                    style="
+                      padding: 16px 22px;
+                      background-color: #f4f4f5;
+                      border: 1px solid #e4e4e7;
+                      border-radius: 8px;
+                      color: #09090b;
+                      font-family: 'SFMono-Regular', Consolas, monospace;
+                      font-size: 27px;
+                      line-height: 34px;
+                      font-weight: 600;
+                      letter-spacing: 5px;
+                    "
+                  >
+                    {{OTP}}
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Expiry -->
+          <tr>
+            <td align="center" style="padding: 18px 24px 0;">
+              <p style="
+                margin: 0;
+                color: #71717a;
+                font-size: 13px;
+                line-height: 20px;
+              ">
+                This code expires in <strong style="color: #3f3f46;">
+                5 minutes</strong>.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Security notice -->
+          <tr>
+            <td style="padding: 28px 24px 0;">
+              <table
+                role="presentation"
+                width="100%"
+                cellpadding="0"
+                cellspacing="0"
+                border="0"
+                style="
+                  background-color: #fafafa;
+                  border: 1px solid #e4e4e7;
+                  border-radius: 8px;
+                "
+              >
+                <tr>
+                  <td style="padding: 16px;">
+                    <p style="
+                      margin: 0 0 5px;
+                      color: #18181b;
+                      font-size: 13px;
+                      line-height: 20px;
+                      font-weight: 600;
+                    ">
+                      Keep your account secure
+                    </p>
+
+                    <p style="
+                      margin: 0;
+                      color: #71717a;
+                      font-size: 12px;
+                      line-height: 19px;
+                    ">
+                      Never share this code with anyone.
+                      Our team will never ask you for it.
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Divider -->
+          <tr>
+            <td style="padding: 28px 24px 0;">
+              <div style="
+                height: 1px;
+                background-color: #e4e4e7;
+                font-size: 1px;
+                line-height: 1px;
+              ">&nbsp;</div>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td align="center" style="padding: 22px 24px 30px;">
+              <p style="
+                margin: 0;
+                color: #a1a1aa;
+                font-size: 12px;
+                line-height: 19px;
+              ">
+                If you didn't request this code, you can safely
+                ignore this email.
+              </p>
+
+              <p style="
+                margin: 18px 0 0;
+                color: #71717a;
+                font-size: 12px;
+                line-height: 20px;
+              ">
+                Thanks,<br />
+                <strong style="color: #3f3f46; font-weight: 600;">
+                  The {{APP_NAME}} Team
+                </strong>
+              </p>
+            </td>
+          </tr>
+        </table>
+
+        <!-- Copyright -->
+        <table
+          role="presentation"
+          width="100%"
+          cellpadding="0"
+          cellspacing="0"
+          border="0"
+          style="max-width: 440px;"
+        >
+          <tr>
+            <td align="center" style="padding: 24px 16px 0;">
+              <p style="
+                margin: 0;
+                color: #a1a1aa;
+                font-size: 11px;
+                line-height: 18px;
+              ">
+                © {{YEAR}} {{APP_NAME}}. All rights reserved.
+              </p>
+            </td>
+          </tr>
+        </table>
+
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>

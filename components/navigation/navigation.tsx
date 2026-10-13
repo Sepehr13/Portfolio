@@ -19,7 +19,7 @@ export default function Navigation() {
       <div className="font-bold text-xl">SA</div>
       <div className="flex space-x-4">
         <Button variant="ghost" size="icon" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
-          {mounted && theme === "system" ? <SunMoon /> : theme === "dark" ? <Sun /> : <Moon />}
+          {mounted && theme === "system" ? <SunMoon /> : mounted && theme === "dark" ? <Sun /> : <Moon />}
         </Button>
         <Button variant="outline" size="lg" className="bg-black text-white border-black dark:bg-white dark:text-black dark:border-white hover:bg-gray-800 hover:text-white dark:hover:bg-gray-100">
           <Link href="/Sepehr Azizi Resume.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2">

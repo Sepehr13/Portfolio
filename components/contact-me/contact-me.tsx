@@ -1,25 +1,36 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 
-import { submitForm } from "@/app/actions";
-import { LoaderCircle, Mail } from "lucide-react";
+import { submitForm, submitOTP } from "@/app/actions";
+import { AlertCircleIcon, LoaderCircle, Mail } from "lucide-react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSquareLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons'
 import { Button } from "../ui/button";
 import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { toast } from "../ui/toast";
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "../ui/dialog";
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp";
+import { REGEXP_ONLY_DIGITS } from "input-otp";
+import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 
 const initialState = {
   status: "idle",
   submissionId: "",
+  rawData: undefined,
   error: {
     name: [],
     email: [],
     message: [],
   },
+}
+
+const otpInitialState = {
+  status: "idle",
+  submissionId: "",
+  error: "",
 }
 
 export default function ContactMe() {
@@ -41,6 +52,10 @@ export default function ContactMe() {
   }
 
   const [state, formAction, isSubmitting] = useActionState(submitForm, initialState);
+  const [otpState, otpFormAction, isOTPSubmitting] = useActionState(submitOTP, otpInitialState);
+  const [isDialogOpen, setDialogOpen] = useState(false);
+  const [showOTPError, setShowOTPError] = useState(false);
+  const [otp, setOtp] = useState("");
 
   useEffect(() => {
 
@@ -52,7 +67,12 @@ export default function ContactMe() {
         showErrorToast("Unable to save your message. Please try again later.");
         break;
       case "db-count-error":
-        showErrorToast("You can not send message more than 5 times.");
+        showErrorToast("You can not send message more than 3 times.");
+        break;
+      case "otp":
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setOtp("");
+        setDialogOpen(true);
         break;
     
       default:
@@ -60,7 +80,24 @@ export default function ContactMe() {
     }
   }, [state.submissionId]);
 
+  useEffect(() => {
+
+    switch (otpState.status) {
+      case "success":
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setDialogOpen(false);
+        showToast();
+        break;
+      case "error":
+        setShowOTPError(true);
+    
+      default:
+        break;
+    }
+  }, [otpState.submissionId]);
+
   return (
+    <div>
     <div id="contact-me" className="relative flex flex-col md:flex-row xl:items-start items-start justify-start xl:justify-between bg-gray-50 dark:bg-background border border-border rounded-lg p-8 xl:mx-48 mx-8 my-16">
       <div className="flex flex-col">
         <div className="text-md text-muted-foreground uppercase">Get In Touch</div>
@@ -117,6 +154,56 @@ export default function ContactMe() {
           {isSubmitting ? "Sending..." : "Send Message"}
         </Button>
       </form>
+    </div>
+    
+    <Dialog open={isDialogOpen} onOpenChange={setDialogOpen}>
+      <DialogContent className="sm:max-w-sm">
+        {isDialogOpen && <form action={otpFormAction}>
+          <DialogHeader>
+            <DialogTitle>One Time Password</DialogTitle>
+            <DialogDescription>
+              A 6-digits code has been sent to <b>{state.rawData?.email}</b>. Please check your inbox.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex flex-col justify-center items-center gap-3 my-4">
+            <InputOTP 
+              name="code" 
+              maxLength={6} 
+              required 
+              pattern={REGEXP_ONLY_DIGITS}
+              value={otp}
+              onChange={(val) => setOtp(val)}
+              >
+              <InputOTPGroup className="*:data-[slot=input-otp-slot]:h-12 *:data-[slot=input-otp-slot]:w-11 *:data-[slot=input-otp-slot]:text-xl">
+                <InputOTPSlot index={0} />
+                <InputOTPSlot index={1} />
+                <InputOTPSlot index={2} />
+                <InputOTPSlot index={3} />
+                <InputOTPSlot index={4} />
+                <InputOTPSlot index={5} />
+              </InputOTPGroup>
+            </InputOTP>
+            {otpState.error && showOTPError && (
+              <Alert variant="destructive" className="max-w-md">
+                <AlertCircleIcon />
+                <AlertTitle>An Error Occurred</AlertTitle>
+                <AlertDescription>
+                  {otpState.error}
+                </AlertDescription>
+              </Alert>
+            )}
+            <input type="hidden" name="rawData" value={JSON.stringify(state.rawData)} />
+          </div>
+          <DialogFooter>
+            <DialogClose render={<Button variant="outline">Cancel</Button>} />
+            <Button type="submit" onClick={() => {setShowOTPError(false)}} disabled={otp.length < 6 || isOTPSubmitting}>
+            {isOTPSubmitting && <LoaderCircle size={28} className="animate-spin" />}
+            {isOTPSubmitting ? "Submitting..." : "Submit"}
+            </Button>
+          </DialogFooter>
+        </form>}
+      </DialogContent>
+    </Dialog>
     </div>
   );
 }
