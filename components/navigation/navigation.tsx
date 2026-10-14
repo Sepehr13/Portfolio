@@ -15,7 +15,7 @@ export default function Navigation() {
   const mounted = useSyncExternalStore(subscribeToMount, getClientSnapshot, getServerSnapshot)
 
   return (
-    <div className="fixed z-20 w-full h-16 backdrop-blur-xs border-b text-foreground flex items-center justify-between lg:px-24 px-8">
+    <div className="fixed z-20 xl:w-[calc(100%-19.5rem)] w-full h-16 backdrop-blur-xs xl:border xl:border-t-0 border-b xl:rounded-b-xl text-foreground flex items-center justify-between xl:ml-40 lg:px-24 px-8 shadow-md">
       <div className="font-bold text-xl">SA</div>
       <div className="flex space-x-4">
         <Button variant="ghost" size="icon" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
