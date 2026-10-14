@@ -9,9 +9,9 @@ import Image from "next/image";
 
 export function HeroSection() {
 
-  function handleScroll() {
+  function handleScroll(id: string) {
     document
-      .getElementById("my-work-section")
+      .getElementById(id)
       ?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
@@ -30,10 +30,10 @@ export function HeroSection() {
             I build scalable web and mobile applications, work with modern technologies, and enjoy solving complex problems. I&apos;m passionate about clean code, great user experiences, and continuous learning.
           </div>
           <div className="flex flex-row gap-6">
-            <Button size="lg" className="px-8 py-6" onClick={handleScroll}>
+            <Button size="lg" className="px-8 py-6" onClick={() => handleScroll("my-work-section")}>
               View My Work <MoveRight />
             </Button>
-            <Button variant="outline" size="lg" className="p-6">
+            <Button variant="outline" size="lg" className="p-6" onClick={() => handleScroll("contact-me")}>
               Contact Me
             </Button>
           </div>
