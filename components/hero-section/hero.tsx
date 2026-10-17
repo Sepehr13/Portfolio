@@ -6,6 +6,7 @@ import { Button } from "../ui/button";
 import { Code, Heart, MapPin, MoveRight } from "lucide-react";
 import { Separator } from "../ui/separator";
 import Image from "next/image";
+import ScrollReveal from "../ui/ScrollReveal";
 
 export function HeroSection() {
 
@@ -24,11 +25,12 @@ export function HeroSection() {
       />
       <div className="flex flex-row z-10 xl:justify-between justify-center items-center w-full lg:px-48 px-8">
         <div className="flex flex-col gap-4 lg:max-w-xl max-w-xl min-w-sm">
-          <div className="text-xl text-muted-foreground font-medium">Hi, I&apos;m <span className="text-primary">Sepehr Azizi</span> 👋</div>
-          <div className="text-5xl font-bold text-foreground">Senior Full Stack Software Engineer</div>
-          <div className="text-lg text-muted-foreground">
+          <ScrollReveal delay={0}><div className="text-xl text-muted-foreground font-medium">Hi, I&apos;m <span className="text-primary">Sepehr Azizi</span> 👋</div></ScrollReveal>
+          <ScrollReveal delay={0.15}><div className="text-5xl font-bold text-foreground">Senior Full Stack Software Engineer</div></ScrollReveal>
+          <ScrollReveal delay={0.3}><div className="text-lg text-muted-foreground">
             I build scalable web and mobile applications, work with modern technologies, and enjoy solving complex problems. I&apos;m passionate about clean code, great user experiences, and continuous learning.
-          </div>
+          </div></ScrollReveal>
+          <ScrollReveal delay={0.45}>
           <div className="flex flex-row gap-6">
             <Button size="lg" className="px-8 py-6" onClick={() => handleScroll("my-work-section")}>
               View My Work <MoveRight />
@@ -37,6 +39,8 @@ export function HeroSection() {
               Contact Me
             </Button>
           </div>
+          </ScrollReveal>
+          <ScrollReveal delay={0.6}>
           <div className="flex flex-row gap-4 text-muted-foreground text-sm mt-6">
             <div className="flex flex-row items-center gap-2">
               <MapPin size={16} />
@@ -53,7 +57,9 @@ export function HeroSection() {
               Always learning
             </div>
           </div>
+          </ScrollReveal>
         </div>
+        <ScrollReveal delay={0.75}>
         <div>
           <Image
           src="/photo.jpeg"
@@ -63,6 +69,7 @@ export function HeroSection() {
           className="rounded-xl object-cover shadow-2xl hidden xl:block"
         />
         </div>
+        </ScrollReveal>
       </div>
     </div>
   );

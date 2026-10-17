@@ -5,6 +5,7 @@ import { Moon, Sun, Download, SunMoon } from 'lucide-react'
 import { Button } from "../ui/button";
 import { useTheme } from "next-themes";
 import { useSyncExternalStore } from "react";
+import { motion } from "motion/react";
 
 const subscribeToMount = () => () => {};
 const getClientSnapshot = () => true;
@@ -15,18 +16,28 @@ export default function Navigation() {
   const mounted = useSyncExternalStore(subscribeToMount, getClientSnapshot, getServerSnapshot)
 
   return (
-    <div className="fixed z-20 xl:w-[calc(100%-19.5rem)] w-full h-16 backdrop-blur-xs xl:border xl:border-t-0 border-b xl:rounded-b-xl text-foreground flex items-center justify-between xl:ml-40 lg:px-24 px-8 shadow-md">
-      <div className="font-bold text-xl">SA</div>
-      <div className="flex space-x-4">
-        <Button variant="ghost" size="icon" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
-          {mounted && theme === "system" ? <SunMoon /> : mounted && theme === "dark" ? <Sun /> : <Moon />}
-        </Button>
-        <Button variant="outline" size="lg" className="bg-black text-white border-black dark:bg-white dark:text-black dark:border-white hover:bg-gray-800 hover:text-white dark:hover:bg-gray-100">
-          <Link href="/Sepehr Azizi Resume.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2">
-            <Download className="mr-2" data-icon="inline-start" /> Download CV
-          </Link>
-        </Button>
+    <motion.div 
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{
+        duration: 0.6,
+        ease: "easeOut",
+      }}
+    >
+      <div className="fixed z-20 xl:w-[calc(100%-19.5rem)] w-full h-16 backdrop-blur-xs xl:border xl:border-t-0 border-b xl:rounded-b-xl text-foreground flex items-center justify-between xl:ml-40 lg:px-24 px-8">
+        <div className="font-bold text-xl">SA</div>
+        <div className="flex space-x-4">
+          <Button variant="ghost" size="icon" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+            {mounted && theme === "system" ? <SunMoon /> : mounted && theme === "dark" ? <Sun /> : <Moon />}
+          </Button>
+          <Button variant="outline" size="lg" className="bg-black text-white border-black dark:bg-white dark:text-black dark:border-white hover:bg-gray-800 hover:text-white dark:hover:bg-gray-100">
+            <Link href="/Sepehr Azizi Resume.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2">
+              <Download className="mr-2" data-icon="inline-start" /> Download CV
+            </Link>
+          </Button>
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
